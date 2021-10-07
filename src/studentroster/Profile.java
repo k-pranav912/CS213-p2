@@ -4,6 +4,11 @@ public class Profile {
     private String name;
     private Major major;
 
+    public Profile(String name, Major major) {
+        this.name = name;
+        this.major = major;
+    }
+
     @Override
     public boolean equals(Object object) {
         if ((object == null) || (this == null)) return false;
