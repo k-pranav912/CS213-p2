@@ -11,4 +11,16 @@ public class International extends NonResident{
         super(profile, credits);
         this.isStudyAbroad = studyAbroad;
     }
+
+    @Override
+    public void tuitionDue() {
+        if (!isStudyAbroad) {
+            // TODO check if the below method changes the instance var for this subclass.
+            super.tuitionDue();
+            tuitionDue += additionalFee;
+        } else {
+            tuitionDue += additionalFee;
+            tuitionDue += super.getUniversityFeeFullTime();
+        }
+    }
 }
