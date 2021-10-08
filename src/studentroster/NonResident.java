@@ -13,6 +13,14 @@ public class NonResident extends Student{
 
     @Override
     public void tuitionDue() {
-
+        if (super.getCreditHours() > super.getMaxPartTimeCredits()) {
+            tuitionDue = tuition + super.getUniversityFeeFullTime();
+            int over16Credits = super.getCreditHours() - super.getFreeFullTimeCredits();
+            if (over16Credits > 0) {
+                tuitionDue += over16Credits * tuitionRate;
+            }
+        } else {
+            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeeFullTime();
+        }
     }
 }
