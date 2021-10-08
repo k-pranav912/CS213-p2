@@ -16,7 +16,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return this.profile.toString();
+        return this.profile.toString() + ":" + creditHours + " credit hours";
     }
 
     @Override
