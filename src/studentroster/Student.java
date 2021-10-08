@@ -3,15 +3,55 @@ package studentroster;
 public class Student {
     private static Profile profile;
     private static int creditHours;
+    private static double tuitionPaid;
+    private static Date lastPayment;
 
     private static final int minCredits = 3;
     private static final int maxCredits = 12;
+    private static final int maxPartTimeCredits = 11;
+    private static final int universityFeeFullTime = 3268;
+    private static final double universityFeePartTime = 0.80 * universityFeeFullTime;
 
-    public Student (Profile profile) {
+    public Student (Profile profile, int credits) {
         this.profile = profile;
+        this.creditHours = credits;
+        this.tuitionPaid = 0;
+        this.lastPayment = null;
     }
 
     public void tuitionDue(){
+    }
+
+    public double getTuitionPaid() {
+        return tuitionPaid;
+    }
+
+    public void addTuitionPaid(int inputValue) {
+        this.tuitionPaid += inputValue;
+    }
+
+    public static int getMinCredits() {
+        return minCredits;
+    }
+
+    public static int getMaxCredits() {
+        return maxCredits;
+    }
+
+    public int getMaxPartTimeCredits() {
+        return maxPartTimeCredits;
+    }
+
+    public static int getCreditHours() {
+        return creditHours;
+    }
+
+    public static int getUniversityFeeFullTime() {
+        return universityFeeFullTime;
+    }
+
+    public static double getUniversityFeePartTime() {
+        return universityFeePartTime;
     }
 
     @Override
