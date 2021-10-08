@@ -22,7 +22,7 @@ public class Roster {
     }
 
     private void grow() {
-        Student[] tempRoster = new Student[roster.length];
+        Student[] tempRoster;
         tempRoster = roster;
         roster = new Student[tempRoster.length + ROSTER_INCREASE_SIZE];
 
