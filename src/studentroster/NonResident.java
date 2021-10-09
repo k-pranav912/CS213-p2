@@ -20,7 +20,20 @@ public class NonResident extends Student{
                 tuitionDue += over16Credits * tuitionRate;
             }
         } else {
-            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeeFullTime();
+            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
         }
+    }
+
+    @Override
+    public double getTuition() {
+        return tuitionDue;
+    }
+
+    public static void main(String[] args) {
+        Major major = Major.toMajor("CS");
+        Profile profile = new Profile("Pranav", major);
+        NonResident student = new NonResident(profile, 18);
+        student.tuitionDue();
+        System.out.println(student.getTuition());
     }
 }

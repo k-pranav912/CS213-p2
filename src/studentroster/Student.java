@@ -59,6 +59,8 @@ public class Student {
         return freeFullTimeCredits;
     }
 
+    protected double getTuition(){return 0;}
+
     @Override
     public String toString() {
         return this.profile.toString() + ":" + creditHours + " credit hours";

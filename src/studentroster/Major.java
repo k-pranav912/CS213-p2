@@ -41,7 +41,7 @@ public enum Major {
      * @return the major that the string represents
      */
     public static Major toMajor(String majorString) {
-        switch (majorString) {
+        switch (majorString.toUpperCase()) {
             case "CS":
                 return CS;
             case "IT":

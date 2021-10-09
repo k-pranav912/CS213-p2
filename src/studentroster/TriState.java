@@ -10,19 +10,31 @@ public class TriState extends NonResident{
     // true if from NY, false if from CT
     private static boolean fromNY;
 
-    public TriState(Profile profile, int credits) {
+    public TriState(Profile profile, int credits, boolean nyOrCt) {
         super(profile, credits);
+        fromNY = nyOrCt;
     }
 
     @Override
     public void tuitionDue() {
         // TODO check if the below method changes the instance var for this subclass.
         super.tuitionDue();
+        tuitionDue = super.getTuition();
         if (fromNY) {
             tuitionDue -= newyorkDiscount;
         } else {
             tuitionDue -= connecticutDiscount;
         }
+    }
 
+    @Override
+    public double getTuition(){return tuitionDue;}
+
+    public static void main(String[] args) {
+        Major major = Major.toMajor("CS");
+        Profile profile = new Profile("Pranav", major);
+        TriState student = new TriState(profile, 9, true);
+        student.tuitionDue();
+        System.out.println(student.getTuition());
     }
 }

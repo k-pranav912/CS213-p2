@@ -6,7 +6,7 @@ public class Resident extends Student{
     private static double tuitionDue;
 
     private static final int maxfinAid = 10000;
-    private static final int tuition = 29737;
+    private static final int tuition = 12536;
     private static final int tuitionRate = 404;
 
     private static int finAid;
@@ -29,8 +29,21 @@ public class Resident extends Student{
             if (over16Credits > 0) {
                 tuitionDue += over16Credits * tuitionRate;
             }
+            tuitionDue -= finAid;
         } else {
-            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeeFullTime();
+            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
+            tuitionDue -= finAid;
         }
+    }
+
+    @Override
+    public double getTuition() {return tuitionDue;}
+
+    public static void main(String[] args) {
+        Major major = Major.toMajor("CS");
+        Profile profile = new Profile("Pranav", major);
+        Resident student = new Resident(profile, 18);
+        student.tuitionDue();
+        System.out.println(student.getTuition());
     }
 }

@@ -17,10 +17,26 @@ public class International extends NonResident{
         if (!isStudyAbroad) {
             // TODO check if the below method changes the instance var for this subclass.
             super.tuitionDue();
+            tuitionDue = super.getTuition();
             tuitionDue += additionalFee;
+            //System.out.println("a\n");
         } else {
             tuitionDue += additionalFee;
             tuitionDue += super.getUniversityFeeFullTime();
+            //System.out.println("b\n");
         }
+    }
+
+    @Override
+    public double getTuition() {
+        return tuitionDue;
+    }
+
+    public static void main(String[] args) {
+        Major major = Major.toMajor("CS");
+        Profile profile = new Profile("Pranav", major);
+        International student = new International(profile, 17, true);
+        student.tuitionDue();
+        System.out.println(student.getTuition());
     }
 }
