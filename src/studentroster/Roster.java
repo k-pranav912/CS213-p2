@@ -58,4 +58,23 @@ public class Roster {
         roster[deletionIndex] = null;
         return true;
     }
+
+    public void calculate() {
+
+    }
+
+    public void pay(Student student, int amountPaid) {
+
+    }
+
+    public void printRoster() {
+
+    }
+
+    public void printByName() {
+
+    }
+    public void printByDate() {
+
+    }
 }
