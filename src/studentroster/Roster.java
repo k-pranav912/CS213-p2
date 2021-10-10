@@ -81,9 +81,98 @@ public class Roster {
     }
 
     public void printByName() {
+        String[] result = new String[size];
+
+        int counterIndex = 0;
+        for (int i = 0; i < roster.length; i++) {
+            if (roster[i] != null) {
+                result[counterIndex] = roster[i].toString();
+            }
+        }
+
+        for(int i = 0; i < result.length; i++) {
+            for (int j = i + 1; j < result.length; j++) {
+                if(result[i].compareTo(result[j]) > 0) {
+                    String temp = result[i];
+                    result[i] = result[j];
+                    result[j] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
+        }
 
     }
-    public void printByDate() {
+
+    private boolean checkArray(int[] arr, int key)
+    {
+        for (int i = 0; i < arr.length; i++)
+        {
+            if (arr[i] == key) return true;
+        }
+        return false;
+    }
+
+    public static int[] arrSort(int[] arr)
+    {
+        for (int i = 0; i < arr.length; i++)
+        {
+            for (int j = i+1; j < arr.length; j++)
+            {
+                int temp = 0;
+                if (arr[i] > arr[j]) {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+
+        return arr;
+    }
+
+    private int[] genDateArray()
+    {
+        int[] tempArr = new int[size];
+        int arrIndex = 0;
+
+        for (int i = 0; i < roster.length; i++)
+        {
+            if (roster[i] != null && !checkArray(tempArr, roster[i].getDateInt()))
+            {
+                tempArr[arrIndex] = roster[i].getDateInt();
+                arrIndex++;
+            }
+        }
+
+        tempArr = arrSort(tempArr);
+
+        return tempArr;
+    }
+
+    public void printByDate()
+    {
+        if (size <= 0)
+        {
+            System.out.println("The roster is empty!");
+            return;
+        }
+
+        int[] releaseDates = genDateArray();
+
+        System.out.println("*List of students in the roster.");
+        for (int i = 0; i < releaseDates.length; i++)
+        {
+            if (releaseDates[i] == 0) continue;
+
+            for (int j = 0; j < roster.length; j++)
+            {
+                if (roster[j] != null && roster[j].getDateInt() == releaseDates[i]) System.out.println(roster[j]);
+            }
+        }
+        System.out.println("*End of list");
 
     }
 

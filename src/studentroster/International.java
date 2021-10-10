@@ -17,16 +17,14 @@ public class International extends NonResident{
     @Override
     public void tuitionDue() {
         if (!isStudyAbroad) {
-            // TODO check if the below method changes the instance var for this subclass.
             super.tuitionDue();
             tuitionDue = super.getTuition();
             tuitionDue += additionalFee;
-            //System.out.println("a\n");
         } else {
             tuitionDue += additionalFee;
-            tuitionDue += super.getUniversityFeeFullTime();
-            //System.out.println("b\n");
+            tuitionDue += getUniversityFeeFullTime();
         }
+        tuitionDue -= getTuitionPaid();
     }
 
     @Override
