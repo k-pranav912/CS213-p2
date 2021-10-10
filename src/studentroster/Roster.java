@@ -79,4 +79,23 @@ public class Roster {
     public void printByDate() {
 
     }
+
+    public static void main(String[] args) {
+        Major major = Major.toMajor("CS");
+        Profile profile = new Profile("Pranav", major);
+        Student student1 = new Resident(profile, 18, 1000);
+        System.out.println(student1);
+
+        Major major2 = Major.toMajor("EE");
+        Profile profile2 = new Profile("Neel", major2);
+        Student student2 = new Resident(profile2, 17, 1234);
+        System.out.println(student2);
+
+        System.out.println();
+
+        Roster roster1= new Roster();
+        roster1.add(student1);
+        roster1.add(student2);
+        roster1.printRoster();
+    }
 }

@@ -1,8 +1,8 @@
 package studentroster;
 
 public class International extends NonResident{
-    private static boolean isStudyAbroad;
-    private static double tuitionDue;
+    private boolean isStudyAbroad;
+    private double tuitionDue;
 
     private static final int minInternationalCredits = 12;
     private static final int additionalFee = 2650;

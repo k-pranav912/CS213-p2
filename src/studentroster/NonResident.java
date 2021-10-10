@@ -2,7 +2,7 @@ package studentroster;
 
 public class NonResident extends Student{
 
-    private static double tuitionDue;
+    private double tuitionDue;
 
     private static final int tuition = 29737;
     private static final int tuitionRate = 966;
