@@ -1,5 +1,5 @@
 package studentroster;
 
 public class RunProject2 {
-    new TuitionManager.run();
+    public static void main(String args[]) { new TuitionManager().run(); }
 }

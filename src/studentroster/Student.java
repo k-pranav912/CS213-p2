@@ -7,7 +7,7 @@ public class Student {
     private static Date lastPayment;
 
     private static final int minCredits = 3;
-    private static final int maxCredits = 12;
+    private static final int maxCredits = 24;
     private static final int maxPartTimeCredits = 11;
     private static final int freeFullTimeCredits = 16;
     private static final int universityFeeFullTime = 3268;

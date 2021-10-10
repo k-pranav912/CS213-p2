@@ -10,12 +10,16 @@ public class TuitionManager {
      */
     private static void exitManager()
     {
-        System.out.println("Collection Manager terminated.");
+        System.out.println("Tuition Manager terminated.");
         System.exit(0);
     }
 
     private static Profile makeProfile(StringTokenizer strTokens)
     {
+        if (strTokens.hasMoreTokens() == false) {
+            System.out.println("Missing Data in command line");
+            return null;
+        }
         String name = strTokens.nextToken();
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Missing Data in command line");
@@ -72,38 +76,37 @@ public class TuitionManager {
         return credits;
     }
 
-    private static boolean checkState(StringTokenizer strTokens, Boolean stateBoolean) {
+    private static int checkState(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Missing Data in command line");
-            return false;
+            return -1;
         }
         String state = strTokens.nextToken();
 
         if (state.toUpperCase().equals("NY"))
-            stateBoolean = new Boolean(true);
+            return 1;
         else if (state.toUpperCase().equals("CT"))
-            stateBoolean = new Boolean(false);
-        else
-        {
-            System.out.println("Not part of the tri-state area.");
-            return false;
-        }
-        return true;
+            return 0;
+
+        System.out.println("Not part of the tri-state area.");
+        return -1;
     }
 
-    private static boolean checkStudyAbroad(StringTokenizer strTokens, Boolean studyAbroadBoolean) {
+    private static int checkStudyAbroad(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Missing Data in command line");
-            return false;
+            return -1;
         }
         String studyAbroad = strTokens.nextToken();
 
         if (studyAbroad.equals("true"))
-            studyAbroadBoolean = new Boolean(true);
-        else
-            studyAbroadBoolean = new Boolean(false);
-
-        return true;
+            return 1;
+        else if (studyAbroad.equals("false"))
+            return 0;
+        else {
+            System.out.println("Invalid status for studying abroad.");
+            return -1;
+        }
     }
 
     private static void addStudent(Student student, Roster studentRoster)
@@ -145,8 +148,10 @@ public class TuitionManager {
         int credits = checkCredits(strTokens, false);
         if (credits < 0) return;
 
-        Boolean stateBoolean = null;
-        if(checkState(strTokens, stateBoolean) == false) return;
+        boolean stateBoolean = true;
+        int stateInteger = checkState(strTokens);
+        if(stateInteger < 0) return;
+        else if (stateInteger == 0) stateBoolean = false;
 
         TriState student = new TriState(profile, credits, stateBoolean);
 
@@ -160,8 +165,10 @@ public class TuitionManager {
         int credits = checkCredits(strTokens, true);
         if (credits < 0) return;
 
-        Boolean studyAbroadBoolean = null;
-        if (checkStudyAbroad(strTokens, studyAbroadBoolean) == false) return;
+        boolean studyAbroadBoolean = true;
+        int studyAbroadInteger = checkStudyAbroad(strTokens);
+        if (studyAbroadInteger < 0) return;
+        else if (studyAbroadInteger == 0) studyAbroadBoolean = false;
 
         International student = new International(profile, credits, studyAbroadBoolean);
 
@@ -217,10 +224,10 @@ public class TuitionManager {
                 payTuition(strTokens, studentRoster);
                 break;
             case "S":
-                setStudyAbroad(strTokens, studentRoster);
+                //setStudyAbroad(strTokens, studentRoster);
                 break;
             case "F":
-                setFinancialAid(strTokens, studentRoster);
+                //setFinancialAid(strTokens, studentRoster);
                 break;
             case "P":
                 studentRoster.printRoster();
