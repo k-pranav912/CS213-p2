@@ -22,6 +22,7 @@ public class NonResident extends Student{
         } else {
             tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
         }
+        tuitionDue -= getTuitionPaid();
     }
 
     @Override

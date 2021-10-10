@@ -20,11 +20,14 @@ public class TriState extends NonResident{
         // TODO check if the below method changes the instance var for this subclass.
         super.tuitionDue();
         tuitionDue = super.getTuition();
-        if (fromNY) {
-            tuitionDue -= newyorkDiscount;
-        } else {
-            tuitionDue -= connecticutDiscount;
+        if (!isPartTime()) {
+            if (fromNY) {
+                tuitionDue -= newyorkDiscount;
+            } else {
+                tuitionDue -= connecticutDiscount;
+            }
         }
+        tuitionDue -= getTuitionPaid();
     }
 
     @Override
@@ -33,7 +36,7 @@ public class TriState extends NonResident{
     public static void main(String[] args) {
         Major major = Major.toMajor("CS");
         Profile profile = new Profile("Pranav", major);
-        TriState student = new TriState(profile, 9, true);
+        TriState student = new TriState(profile, 11, true);
         student.tuitionDue();
         System.out.println(student.getTuition());
     }

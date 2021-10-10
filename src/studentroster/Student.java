@@ -31,8 +31,9 @@ public class Student {
         return tuitionPaid;
     }
 
-    public void addTuitionPaid(int inputValue) {
+    public void addTuitionPaid(int inputValue, Date date) {
         this.tuitionPaid += inputValue;
+        lastPayment = date;
     }
 
     public static int getMinCredits() {
@@ -64,6 +65,15 @@ public class Student {
     }
 
     protected double getTuition(){return 0;}
+
+    public boolean isPartTime() {
+        if (creditHours > maxPartTimeCredits) return false;
+        return true;
+    }
+
+    public int getDateInt() {
+        return lastPayment.getDateIndex();
+    }
 
     @Override
     public String toString() {

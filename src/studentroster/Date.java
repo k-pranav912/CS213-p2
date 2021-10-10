@@ -89,7 +89,7 @@ public class Date implements Comparable<Date>{
     /**
      * Method that check whether a Date instance is valid or not.
      * Conditions for validity:
-     * Current year > Year > 1980
+     * Current year > Year > 2021
      * 0 < Day <= 28/29/30/31 (based on month)
      * 0 < Month <= 12
      * @return boolean; true is Date is a valid instance, false otherwise.

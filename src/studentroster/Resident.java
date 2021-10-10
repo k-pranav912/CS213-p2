@@ -34,6 +34,7 @@ public class Resident extends Student{
             tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
             tuitionDue -= finAid;
         }
+        tuitionDue -= getTuitionPaid();
     }
 
     @Override
