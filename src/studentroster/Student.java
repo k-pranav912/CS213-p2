@@ -32,7 +32,7 @@ public class Student {
     }
 
     public void addTuitionPaid(double inputValue, Date date) {
-        this.tuitionPaid += inputValue;
+        tuitionPaid += inputValue;
         lastPayment = date;
     }
 
@@ -50,6 +50,15 @@ public class Student {
 
     public int getCreditHours() {
         return this.creditHours;
+    }
+
+    public void setCreditHours(int newCreditHours) {
+        this.creditHours = newCreditHours;
+    }
+
+    public void resetTuitionPaid() {
+        this.tuitionPaid = 0;
+        this.lastPayment = null;
     }
 
     public static int getUniversityFeeFullTime() {

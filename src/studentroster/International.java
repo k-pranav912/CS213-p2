@@ -14,6 +14,13 @@ public class International extends NonResident{
 
     public static int getMinInternationalCredits() { return minInternationalCredits; }
 
+    public void setStudyAbroadStatusTrue() {
+        this.isStudyAbroad = true;
+        if (this.getCreditHours() > minInternationalCredits) this.setCreditHours(minInternationalCredits);
+        this.resetTuitionPaid();
+        this.tuitionDue();
+    }
+
     @Override
     public void tuitionDue() {
         if (!isStudyAbroad) {

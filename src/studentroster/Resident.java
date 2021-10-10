@@ -9,7 +9,7 @@ public class Resident extends Student{
     private static final int tuition = 12536;
     private static final int tuitionRate = 404;
 
-    private static int finAid;
+    private static double finAid;
 
     public Resident(Profile profile, int credits) {
         super(profile, credits);
@@ -19,6 +19,21 @@ public class Resident extends Student{
     public Resident(Profile profile, int credits, int finAid) {
         super(profile, credits);
         this.finAid = finAid;
+    }
+
+    public static int getMaxfinAid() {
+        return maxfinAid;
+    }
+
+    public double getFinAid() {
+        return finAid;
+    }
+
+    public boolean setFinAid(double amount) {
+        if (finAid > 0) return false;
+        finAid = amount;
+        this.tuitionDue();
+        return true;
     }
 
     @Override
