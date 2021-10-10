@@ -97,7 +97,7 @@ public class Roster {
         if (((Resident) student).setFinAid(finAidAmount) == false) {
             return -4;
         }
-        return 0
+        return 0;
     }
 
     public void printRoster() {
