@@ -2,8 +2,8 @@ package studentroster;
 
 public class Resident extends Student{
 
-    private static boolean hasTakenAid = false;
-    private static double tuitionDue;
+    private boolean hasTakenAid = false;
+    private double tuitionDue;
 
     private static final int maxfinAid = 10000;
     private static final int tuition = 12536;

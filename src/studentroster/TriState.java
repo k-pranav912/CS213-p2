@@ -2,7 +2,7 @@ package studentroster;
 
 public class TriState extends NonResident{
 
-    private static double tuitionDue;
+    private double tuitionDue;
 
     private static final int newyorkDiscount = 4000;
     private static final int connecticutDiscount = 5000;
