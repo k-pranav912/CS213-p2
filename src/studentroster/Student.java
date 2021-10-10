@@ -1,10 +1,10 @@
 package studentroster;
 
 public class Student {
-    private static Profile profile;
-    private static int creditHours;
-    private static double tuitionPaid;
-    private static Date lastPayment;
+    private Profile profile;
+    private int creditHours;
+    private double tuitionPaid;
+    private Date lastPayment;
 
     private static final int minCredits = 3;
     private static final int maxCredits = 24;
@@ -47,8 +47,8 @@ public class Student {
         return maxPartTimeCredits;
     }
 
-    public static int getCreditHours() {
-        return creditHours;
+    public int getCreditHours() {
+        return this.creditHours;
     }
 
     public static int getUniversityFeeFullTime() {
