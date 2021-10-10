@@ -31,7 +31,7 @@ public class Student {
         return tuitionPaid;
     }
 
-    public void addTuitionPaid(int inputValue, Date date) {
+    public void addTuitionPaid(double inputValue, Date date) {
         this.tuitionPaid += inputValue;
         lastPayment = date;
     }
