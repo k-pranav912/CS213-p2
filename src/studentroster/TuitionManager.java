@@ -205,10 +205,6 @@ public class TuitionManager {
             System.out.println("Invalid amount.");
             return -1;
         }
-        else if (payment > student.getTuition()) {
-            System.out.println("Amount is greater than amount due.");
-            return -1;
-        }
         return payment;
     }
 
@@ -237,7 +233,7 @@ public class TuitionManager {
         if (lastPaymentDate == null) return;
 
         if (studentRoster.pay(student, payment, lastPaymentDate) == false) {
-            System.out.println("Student is not in the roster.");
+            System.out.println("Amount is greater than amount due.");
         }
         else System.out.println("Payment applied.");
     }
