@@ -64,7 +64,7 @@ public class NonResident extends Student{
 
         result += ":total payment:" + df.format(getTuitionPaid());
 
-        result += ":last payemnt:";
+        result += ":last payment:";
 
         if (getLastPayment() == null) {
             result += "--/--/--";

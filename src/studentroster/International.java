@@ -76,8 +76,8 @@ public class International extends NonResident{
     public String toString() {
         String result = super.toString();
         DecimalFormat df = new DecimalFormat("#,##0.00");
-        String replacementString = df.format(super.getTuition());
-        result = result.replaceAll(replacementString, df.format(this.tuitionDue));
+        String replacementString = "tuition due:" + df.format(super.getTuition());
+        result = result.replaceAll(replacementString, "tuition due:" + df.format(this.tuitionDue));
 
         result += ":international";
 
