@@ -41,7 +41,7 @@ public class TuitionManager {
     private static int checkCredits(StringTokenizer strTokens, boolean isInternational)
     {
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Missing Data in command line");
+            System.out.println("Credit hours missing.");
             return -1;
         }
 
@@ -51,11 +51,11 @@ public class TuitionManager {
             credits = Integer.parseInt(creditHours);
         }
         catch (NumberFormatException e) {
-            System.out.println("Invalid Credit Hours");
+            System.out.println("Invalid credit hours");
             return -1;
         }
         if (credits < 0) {
-            System.out.println("Credit Hours cannot be negative.");
+            System.out.println("Credit hours cannot be negative.");
             return -1;
         }
         else if (credits < Student.getMinCredits()) {
@@ -70,7 +70,7 @@ public class TuitionManager {
         }
         else if (credits > Student.getMaxCredits())
         {
-            System.out.println("Credit Hours exceed the maximum " + Student.getMaxCredits() + ".");
+            System.out.println("Credit hours exceed the maximum " + Student.getMaxCredits() + ".");
             return -1;
         }
         return credits;

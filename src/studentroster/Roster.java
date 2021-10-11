@@ -22,7 +22,6 @@ public class Roster {
     private int find(Student student){
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null && student.equals(roster[i])) {
-                System.out.println("" + student + roster[i] + student.equals(roster[i]));
                 return i;
             }
         }
@@ -120,6 +119,11 @@ public class Roster {
     }
 
     public void printByName() {
+        if (size <= 0) {
+            System.out.println("Student roster is empty!");
+            return;
+        }
+
         String[] result = new String[size];
 
         int counterIndex = 0;
@@ -196,7 +200,7 @@ public class Roster {
     {
         if (size <= 0)
         {
-            System.out.println("The roster is empty!");
+            System.out.println("Student roster is empty!");
             return;
         }
 
