@@ -51,7 +51,6 @@ public class Resident extends Student{
     public boolean setFinAid(double amount) {
         if (finAid > 0) return false;
         finAid = amount;
-        tuitionDue -= finAid;
         return true;
     }
 
@@ -70,6 +69,7 @@ public class Resident extends Student{
             tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
         }
         tuitionDue -= getTuitionPaid();
+        tuitionDue -= finAid;
     }
 
     /**
@@ -79,9 +79,6 @@ public class Resident extends Student{
     @Override
     public double getTuition() {return tuitionDue;}
 
-    public boolean hasTakenAid() {
-        return hasTakenAid;
-    }
 
     /**
      * String representation of the Student instance.
