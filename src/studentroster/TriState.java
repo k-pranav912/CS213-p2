@@ -15,7 +15,7 @@ public class TriState extends NonResident{
     private static final int connecticutDiscount = 5000;
 
     // true if from NY, false if from CT
-    private static boolean fromNY;
+    private boolean fromNY;
 
     /**
      * Constructor method, creates an instance of tri-state class based off of non-resident superclass.
@@ -79,7 +79,7 @@ public class TriState extends NonResident{
     public static void main(String[] args) {
         Major major = Major.toMajor("CS");
         Profile profile = new Profile("Pranav", major);
-        TriState student = new TriState(profile, 12, true);
+        TriState student = new TriState(profile, 12, false);
         //student.tuitionDue();
         System.out.println(student.getTuition());
         if (student instanceof TriState) {
