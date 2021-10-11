@@ -105,6 +105,10 @@ public class Resident extends Student{
 
         result += ":resident";
 
+        if (finAid > 0) {
+            result += ":" + "financial aid $" + df.format(finAid);
+        }
+
         return result;
     }
 
