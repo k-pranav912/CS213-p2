@@ -100,7 +100,7 @@ public class Roster {
         if (roster[studentIndex].isPartTime()) {
             return -3;
         }
-        if (((Resident) student).setFinAid(finAidAmount) == false) {
+        if (((Resident) roster[studentIndex]).setFinAid(finAidAmount) == false) {
             return -4;
         }
         return 0;
@@ -126,6 +126,7 @@ public class Roster {
 
         String[] result = new String[size];
 
+        System.out.println("* list of students ordered by name **");;
         int counterIndex = 0;
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null) {
@@ -147,6 +148,8 @@ public class Roster {
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
         }
+
+        System.out.println("* end of roster **");
 
     }
 
@@ -206,7 +209,7 @@ public class Roster {
 
         int[] releaseDates = genDateArray();
 
-        System.out.println("*List of students in the roster.");
+        System.out.println("* list of students made payments ordered by payment date **");
         for (int i = 0; i < releaseDates.length; i++)
         {
             if (releaseDates[i] == 0) continue;
@@ -216,7 +219,7 @@ public class Roster {
                 if ((roster[j] != null && roster[j].getLastPayment() != null) && roster[j].getDateInt() == releaseDates[i]) System.out.println(roster[j]);
             }
         }
-        System.out.println("*End of list");
+        System.out.println("* end of roster **");
 
     }
 

@@ -152,7 +152,6 @@ public class TuitionManager {
         else if (stateInteger == 0) stateBoolean = false;
 
         TriState student = new TriState(profile, credits, stateBoolean);
-
         addStudent(student, studentRoster);
     }
 
@@ -188,8 +187,12 @@ public class TuitionManager {
         System.out.println("Calculation completed.");
     }
 
-    private static double checkPayment(Student student, StringTokenizer strTokens) {
+    private static double checkPayment(Student student, StringTokenizer strTokens, boolean isFinancialAid) {
         if (strTokens.hasMoreTokens() == false) {
+            if (isFinancialAid) {
+                System.out.println("Missing the amount.");
+                return -1;
+            }
             System.out.println("Payment amount missing.");
             return -1;
         }
@@ -226,7 +229,7 @@ public class TuitionManager {
 
         Student student = new Student(profile);
 
-        double payment = checkPayment(student, strTokens);
+        double payment = checkPayment(student, strTokens, false);
         if (payment < 0) return;
 
         Date lastPaymentDate = checkDate(strTokens);
@@ -245,7 +248,7 @@ public class TuitionManager {
         Student student = new Student(profile);
 
         if (studentRoster.setAbroad(student) == false) {
-            System.out.println("Couldn't find the internation student.");
+            System.out.println("Couldn't find the international student.");
         }
         else System.out.println("Tuition updated.");
     }
@@ -256,7 +259,7 @@ public class TuitionManager {
 
         Student student = new Student(profile);
 
-        double finAidAmount = checkPayment(student, strTokens);
+        double finAidAmount = checkPayment(student, strTokens, true);
         if (finAidAmount < 0) return;
         if (finAidAmount > Resident.getMaxfinAid()) {
             System.out.println("Invalid Amount.");
@@ -266,14 +269,19 @@ public class TuitionManager {
         switch (studentRoster.setFinancialAid(student, finAidAmount)) {
             case 0:
                 System.out.println("Tuition Updated.");
+                break;
             case -1:
                 System.out.println("Student not in the roster.");
+                break;
             case -2:
                 System.out.println("Not a resident student.");
+                break;
             case -3:
                 System.out.println("Parttime student doesn't qualify for the award.");
+                break;
             case -4:
                 System.out.println("Awarded once already.");
+                break;
         }
 
     }

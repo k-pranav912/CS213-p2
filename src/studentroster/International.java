@@ -32,7 +32,7 @@ public class International extends NonResident{
     public static int getMinInternationalCredits() { return minInternationalCredits; }
 
     /**
-     * Setter method to set the study-aborad status of an international student.
+     * Setter method to set the study-abroad status of an international student.
      */
     public void setStudyAbroadStatusTrue() {
         this.isStudyAbroad = true;
@@ -51,6 +51,7 @@ public class International extends NonResident{
             tuitionDue = super.getTuition();
             tuitionDue += additionalFee;
         } else {
+            tuitionDue = 0;
             tuitionDue += additionalFee;
             tuitionDue += getUniversityFeeFullTime();
         }
@@ -93,5 +94,6 @@ public class International extends NonResident{
         International student = new International(profile, 17, true);
         student.tuitionDue();
         System.out.println(student.getTuition());
+        System.out.println(student);
     }
 }
