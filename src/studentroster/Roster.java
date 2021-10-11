@@ -15,6 +15,7 @@ public class Roster {
     private int find(Student student){
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null && student.equals(roster[i])) {
+                System.out.println("" + student + roster[i] + student.equals(roster[i]));
                 return i;
             }
         }
@@ -60,17 +61,55 @@ public class Roster {
     }
 
     public void calculate() {
-
+        for (int i = 0; i < roster.length; i++) {
+            if (roster[i] != null) roster[i].tuitionDue();
+        }
     }
 
-    public void pay(Student student, int amountPaid) {
+    public boolean pay(Student student, double amountPaid, Date lastPayment) {
+        int studentIndex = find(student);
+        if (studentIndex < 0) return false;
+        student.addTuitionPaid(amountPaid, lastPayment);
+        student.tuitionDue();
+        return true;
+    }
 
+    public boolean setAbroad(Student student) {
+        int studentIndex = find(student);
+        if (studentIndex < 0) return false;
+        if (roster[studentIndex] instanceof International) {
+            ((International) roster[studentIndex]).setStudyAbroadStatusTrue();
+            return true;
+        }
+        return false;
+    }
+
+    public int setFinancialAid(Student student, double finAidAmount) {
+        int studentIndex = find(student);
+        if (studentIndex < 0) return -1;
+
+        if (!(roster[studentIndex] instanceof Resident)) {
+            return -2;
+        }
+        if (roster[studentIndex].isPartTime()) {
+            return -3;
+        }
+        if (((Resident) student).setFinAid(finAidAmount) == false) {
+            return -4;
+        }
+        return 0;
     }
 
     public void printRoster() {
+        if (size <= 0) {
+            System.out.println("Student roster is empty!");
+            return;
+        }
+        System.out.println("* list of students in the roster **");
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null) System.out.println(roster[i]);
         }
+        System.out.println("* end of roster **");
     }
 
     public void printByName() {

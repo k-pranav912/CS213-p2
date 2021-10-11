@@ -9,6 +9,8 @@ public class Profile {
         this.major = major;
     }
 
+    public Profile() {};
+
     @Override
     public boolean equals(Object object) {
         if ((object == null) || (this == null)) return false;

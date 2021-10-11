@@ -117,19 +117,17 @@ public class TuitionManager {
             System.out.println("Student added.");
     }
 
-    private void addResident(StringTokenizer strTokens, Roster studentRoster) {
+    private static void addResident(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
         int credits = checkCredits(strTokens, false);
         if (credits < 0) return;
-
         Resident student = new Resident(profile, credits);
-
         addStudent(student, studentRoster);
     }
 
-    private void addNonResident(StringTokenizer strTokens, Roster studentRoster) {
+    private static void addNonResident(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
@@ -141,7 +139,7 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
-    private void addTriState(StringTokenizer strTokens, Roster studentRoster) {
+    private static void addTriState(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
@@ -158,7 +156,7 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
-    private void addInternational(StringTokenizer strTokens, Roster studentRoster) {
+    private static void addInternational(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
@@ -175,21 +173,113 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
-    private void removeStudent(StringTokenizer strTokens, Roster studentRoster) {
+    private static void removeStudent(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
         Student student = new Student(profile);
 
-        studentRoster.remove(student);
+        if (studentRoster.remove(student) == false) System.out.println("Student is not in the roster.");
+        else System.out.println("Student removed from the roster.");
     }
 
-    private void payTuition(StringTokenizer strTokens, Roster studentRoster) {
+    private static void calculateTuition(Roster studentRoster) {
+        studentRoster.calculate();
+        System.out.println("Calculation completed.");
+    }
+
+    private static double checkPayment(Student student, StringTokenizer strTokens) {
+        if (strTokens.hasMoreTokens() == false) {
+            System.out.println("Payment amount missing.");
+            return -1;
+        }
+        double payment;
+        try {
+            payment = Double.parseDouble(strTokens.nextToken());
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid amount.");
+            return -1;
+        }
+        if (payment <= 0) {
+            System.out.println("Invalid amount.");
+            return -1;
+        }
+        else if (payment > student.getTuition()) {
+            System.out.println("Amount is greater than amount due.");
+            return -1;
+        }
+        return payment;
+    }
+
+    private static Date checkDate(StringTokenizer strTokens) {
+        if (strTokens.hasMoreTokens() == false) {
+            System.out.println("Payment Date is missing.");
+            return null;
+        }
+        Date paymentDate = new Date(strTokens.nextToken());
+        if (paymentDate.isValid() == false) {
+            System.out.println("Payment date invalid.");
+            return null;
+        }
+        return paymentDate;
+    }
+    private static void payTuition(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
         Student student = new Student(profile);
-         //PAUSING HERE, NEED TO CHECK FOR PAYMENT VALIDITY, AMOUNT, AND DATE
+
+        double payment = checkPayment(student, strTokens);
+        if (payment < 0) return;
+
+        Date lastPaymentDate = checkDate(strTokens);
+        if (lastPaymentDate == null) return;
+
+        if (studentRoster.pay(student, payment, lastPaymentDate) == false) {
+            System.out.println("Student is not in the roster.");
+        }
+        else System.out.println("Payment applied.");
+    }
+
+    private static void setStudyAbroad(StringTokenizer strTokens, Roster studentRoster) {
+        Profile profile = makeProfile(strTokens);
+        if (profile == null) return;
+
+        Student student = new Student(profile);
+
+        if (studentRoster.setAbroad(student) == false) {
+            System.out.println("Couldn't find the internation student.");
+        }
+        else System.out.println("Tuition updated.");
+    }
+
+    private static void setFinancialAid(StringTokenizer strTokens, Roster studentRoster) {
+        Profile profile = makeProfile(strTokens);
+        if (profile == null) return;
+
+        Student student = new Student(profile);
+
+        double finAidAmount = checkPayment(student, strTokens);
+        if (finAidAmount < 0) return;
+        if (finAidAmount > Resident.getMaxfinAid()) {
+            System.out.println("Invalid Amount.");
+            return;
+        }
+
+        switch (studentRoster.setFinancialAid(student, finAidAmount)) {
+            case 0:
+                System.out.println("Tuition Updated.");
+            case -1:
+                System.out.println("Student not in the roster.");
+            case -2:
+                System.out.println("Not a resident student.");
+            case -3:
+                System.out.println("Parttime student doesn't qualify for the award.");
+            case -4:
+                System.out.println("Awarded once already.");
+        }
+
     }
 
     /**
@@ -199,7 +289,7 @@ public class TuitionManager {
      * @param studentRoster the roster for this user
      * @return false if the user entered an invalid command, true otherwise
      */
-    public boolean parseTokens(StringTokenizer strTokens, Roster studentRoster) {
+    private boolean parseTokens(StringTokenizer strTokens, Roster studentRoster) {
         if(strTokens.hasMoreTokens() == false) return true;
         switch (strTokens.nextToken()) {
             case "AR":
@@ -218,16 +308,16 @@ public class TuitionManager {
                 removeStudent(strTokens, studentRoster);
                 break;
             case "C":
-                studentRoster.calculate();
+                calculateTuition(studentRoster);
                 break;
             case "T":
                 payTuition(strTokens, studentRoster);
                 break;
             case "S":
-                //setStudyAbroad(strTokens, studentRoster);
+                setStudyAbroad(strTokens, studentRoster);
                 break;
             case "F":
-                //setFinancialAid(strTokens, studentRoster);
+                setFinancialAid(strTokens, studentRoster);
                 break;
             case "P":
                 studentRoster.printRoster();
