@@ -3,6 +3,9 @@ package studentroster;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * TuitionManager class, which is called by RunProject2 and handles the inputs
+ */
 public class TuitionManager {
 
     /**
@@ -64,7 +67,7 @@ public class TuitionManager {
         }
         else if (isInternational == true && credits < International.getMinInternationalCredits())
         {
-            System.out.println("International students must entroll at least "
+            System.out.println("International students must enroll at least "
                     + International.getMinInternationalCredits() + " credits.");
             return -1;
         }
@@ -355,5 +358,4 @@ public class TuitionManager {
                 System.out.println("Command '" + input + "' is not supported");
         }
     }
-
 }

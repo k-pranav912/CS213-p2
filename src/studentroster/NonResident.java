@@ -76,16 +76,4 @@ public class NonResident extends Student{
 
         return result;
     }
-
-    public static void main(String[] args) {
-        Major major = Major.toMajor("CS");
-        Profile profile = new Profile("Pranav", major);
-        NonResident student = new NonResident(profile, 15);
-        student.tuitionDue();
-        System.out.println(student.getTuition());
-        if (student instanceof TriState) {
-            System.out.println("pee");
-        }
-        System.out.println(student);
-    }
 }

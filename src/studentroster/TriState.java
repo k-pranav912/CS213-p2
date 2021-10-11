@@ -76,15 +76,4 @@ public class TriState extends NonResident{
         return result;
     }
 
-    public static void main(String[] args) {
-        Major major = Major.toMajor("CS");
-        Profile profile = new Profile("Pranav", major);
-        TriState student = new TriState(profile, 12, false);
-        //student.tuitionDue();
-        System.out.println(student.getTuition());
-        if (student instanceof TriState) {
-            System.out.println("boob");
-        }
-        System.out.println(student);
-    }
 }

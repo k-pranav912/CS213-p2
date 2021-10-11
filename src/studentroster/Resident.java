@@ -79,9 +79,7 @@ public class Resident extends Student{
     @Override
     public double getTuition() {return tuitionDue;}
 
-    public boolean hasTakenAid() {
-        return hasTakenAid;
-    }
+
 
     /**
      * String representation of the Student instance.
@@ -98,7 +96,7 @@ public class Resident extends Student{
 
         result += ":total payment:" + df.format(getTuitionPaid());
 
-        result += ":last payemnt:";
+        result += ":last payment:";
 
         if (getLastPayment() == null) {
             result += "--/--/--";
@@ -109,13 +107,5 @@ public class Resident extends Student{
         result += ":resident";
 
         return result;
-    }
-
-    public static void main(String[] args) {
-        Major major = Major.toMajor("CS");
-        Profile profile = new Profile("Pranav", major);
-        Resident student = new Resident(profile, 18);
-        student.tuitionDue();
-        System.out.println(student.getTuition());
     }
 }
