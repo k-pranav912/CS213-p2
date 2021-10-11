@@ -51,7 +51,6 @@ public class Resident extends Student{
     public boolean setFinAid(double amount) {
         if (finAid > 0) return false;
         finAid = amount;
-        tuitionDue -= finAid;
         return true;
     }
 
@@ -105,6 +104,10 @@ public class Resident extends Student{
         }
 
         result += ":resident";
+
+        if (finAid > 0) {
+            result += ":" + "financial aid $" + df.format(finAid);
+        }
 
         return result;
     }
