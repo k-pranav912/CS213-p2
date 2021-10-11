@@ -194,8 +194,6 @@ public class Date implements Comparable<Date>{
             System.out.println("Test2: Invalid Date!");
         }
 
-        System.out.println(test2.compareTo(test1));
-
         // Test 3
         // Year less than 1980
         Date test3 = new Date("08/31/1979");
