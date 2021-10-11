@@ -80,6 +80,7 @@ public class Roster {
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null) {
                 result[counterIndex] = roster[i].toString();
+                counterIndex++;
             }
         }
 
@@ -180,11 +181,27 @@ public class Roster {
         Student student2 = new Resident(profile2, 17, 1234);
         System.out.println(student2);
 
+        Major major3 = Major.toMajor("EE");
+        Profile profile3 = new Profile("Ishan", major3);
+        Student student3 = new Resident(profile3, 15, 12);
+        System.out.println(student3);
+
+        Major major4 = Major.toMajor("EE");
+        Profile profile4 = new Profile("Sanjiv", major4);
+        Student student4 = new Resident(profile4, 13, 154);
+        System.out.println(student2);
+
         System.out.println();
 
         Roster roster1= new Roster();
         roster1.add(student1);
         roster1.add(student2);
+        roster1.add(student3);
+        roster1.add(student4);
         roster1.printRoster();
+
+        System.out.println();
+
+        roster1.printByName();
     }
 }

@@ -1,8 +1,10 @@
 package studentroster;
 
+import java.text.DecimalFormat;
+
 public class TriState extends NonResident{
 
-    private double tuitionDue;
+    private double tuitionDue = 0;
 
     private static final int newyorkDiscount = 4000;
     private static final int connecticutDiscount = 5000;
@@ -33,11 +35,33 @@ public class TriState extends NonResident{
     @Override
     public double getTuition(){return tuitionDue;}
 
+    @Override
+    public String toString() {
+        String result = super.toString();
+        System.out.println(result);
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        String replacementString = df.format(super.getTuition());
+        result = result.replaceAll(replacementString, df.format(this.tuitionDue));
+
+        result += "(tri-state):";
+
+        if (fromNY) {
+            result += "NY";
+        } else {
+            result += "CT";
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Major major = Major.toMajor("CS");
         Profile profile = new Profile("Pranav", major);
-        TriState student = new TriState(profile, 11, true);
-        student.tuitionDue();
+        TriState student = new TriState(profile, 12, true);
+        //student.tuitionDue();
         System.out.println(student.getTuition());
+        if (student instanceof TriState) {
+            System.out.println("boob");
+        }
+        System.out.println(student);
     }
 }

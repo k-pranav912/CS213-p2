@@ -75,6 +75,10 @@ public class Student {
         return lastPayment.getDateIndex();
     }
 
+    public Date getLastPayment() {
+        return lastPayment;
+    }
+
     @Override
     public String toString() {
         return this.profile.toString() + ":" + creditHours + " credit hours";

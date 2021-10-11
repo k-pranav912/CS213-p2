@@ -1,8 +1,10 @@
 package studentroster;
 
+import java.text.DecimalFormat;
+
 public class NonResident extends Student{
 
-    private double tuitionDue;
+    private double tuitionDue = 0;
 
     private static final int tuition = 29737;
     private static final int tuitionRate = 966;
@@ -30,11 +32,37 @@ public class NonResident extends Student{
         return tuitionDue;
     }
 
+    @Override
+    public String toString() {
+        String result = super.toString();
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+
+        result += ":tuition due:" + df.format(tuitionDue);
+
+        result += ":total payment:" + df.format(getTuitionPaid());
+
+        result += ":last payemnt:";
+
+        if (getLastPayment() == null) {
+            result += "--/--/--";
+        } else {
+            result += getLastPayment().toString() + ":";
+        }
+
+        result += ":non-resident";
+
+        return result;
+    }
+
     public static void main(String[] args) {
         Major major = Major.toMajor("CS");
         Profile profile = new Profile("Pranav", major);
-        NonResident student = new NonResident(profile, 18);
+        NonResident student = new NonResident(profile, 15);
         student.tuitionDue();
         System.out.println(student.getTuition());
+        if (student instanceof TriState) {
+            System.out.println("pee");
+        }
+        System.out.println(student);
     }
 }

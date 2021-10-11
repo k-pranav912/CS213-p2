@@ -1,8 +1,10 @@
 package studentroster;
 
+import java.text.DecimalFormat;
+
 public class International extends NonResident{
     private boolean isStudyAbroad;
-    private double tuitionDue;
+    private double tuitionDue = 0;
 
     private static final int minInternationalCredits = 12;
     private static final int additionalFee = 2650;
@@ -30,6 +32,22 @@ public class International extends NonResident{
     @Override
     public double getTuition() {
         return tuitionDue;
+    }
+
+    @Override
+    public String toString() {
+        String result = super.toString();
+        System.out.println(result);
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        String replacementString = df.format(super.getTuition());
+        result = result.replaceAll(replacementString, df.format(this.tuitionDue));
+
+        result += ":international";
+
+        if (isStudyAbroad) {
+            result += ":study-abroad";
+        }
+        return result;
     }
 
     public static void main(String[] args) {
