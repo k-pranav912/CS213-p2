@@ -2,6 +2,11 @@ package studentroster;
 
 import java.text.DecimalFormat;
 
+/**
+ * Resident class, builds upon the student class.
+ * Defines and creates further methods specific to residents on top of students.
+ * @author Neel Prabhu, Saipranav Kalapala
+ */
 public class Resident extends Student{
 
     private boolean hasTakenAid = false;
@@ -13,32 +18,60 @@ public class Resident extends Student{
 
     private static double finAid;
 
+    /**
+     * Constructor method, creates an instance of resident class based off of student superclass.
+     * @param profile Profile instance; contains name and major.
+     * @param credits Number of credits the student is taking.
+     */
     public Resident(Profile profile, int credits) {
         super(profile, credits);
         this.finAid = 0;
     }
 
+    /**
+     * Constructor method, creates an instance of Non-resident class based off of student superclass.
+     * @param profile Profile instance; contains name and major.
+     * @param credits Number of credits the student is taking.
+     * @param finAid Amount of one-time financial aid a student receives.
+     */
     public Resident(Profile profile, int credits, int finAid) {
         super(profile, credits);
         this.finAid = finAid;
         hasTakenAid = true;
     }
 
+    /**
+     * Getter method to return the max amount of financial aid a student can receive.
+     * @return
+     */
     public static int getMaxfinAid() {
         return maxfinAid;
     }
 
+    /**
+     * Getter method to return the amount of financial aid a student has received.
+     * @return
+     */
     public double getFinAid() {
         return finAid;
     }
 
+    /**
+     * Setter mehtod to set the amount of financial aid a student receives.
+     * @param amount amount of financial aid
+     * @return true if student has not already taken aid.
+     */
     public boolean setFinAid(double amount) {
         if (finAid > 0) return false;
         finAid = amount;
+        hasTakenAid = true;
         this.tuitionDue();
         return true;
     }
 
+    /**
+     * Calculates the tuition due for a resident based off of the fee structure.
+     */
     @Override
     public void tuitionDue() {
         if (super.getCreditHours() > super.getMaxPartTimeCredits()) {
@@ -56,6 +89,10 @@ public class Resident extends Student{
         tuitionDue -= getTuitionPaid();
     }
 
+    /**
+     * Method to return the current tuition due for a resident student instance.
+     * @return
+     */
     @Override
     public double getTuition() {return tuitionDue;}
 
@@ -63,6 +100,12 @@ public class Resident extends Student{
         return hasTakenAid;
     }
 
+    /**
+     * String representation of the Student instance.
+     * Subclasses add onto this.
+     * format: Name:Major:Credits:Tuition-Due:Total-Payment:Last-Payment-Date:Residency-Status
+     * @return
+     */
     @Override
     public String toString() {
         String result = super.toString();

@@ -1,5 +1,9 @@
 package studentroster;
 
+/**
+ * Roster Class; handles the implementation of a roster of students.
+ * Includes different students such as residents, non-residents, tri-state non-residents and international students.
+ */
 public class Roster {
     private Student[] roster;
     private int size;
@@ -7,6 +11,9 @@ public class Roster {
     private static final int ROSTER_INCREASE_SIZE = 4;
     private static final int NOT_FOUND = -1;
 
+    /**
+     * Constructor method that initializes a Roster instance.
+     */
     public Roster() {
         this.size = 0;
         this.roster = new Student[ROSTER_INCREASE_SIZE];
@@ -173,7 +180,7 @@ public class Roster {
 
         for (int i = 0; i < roster.length; i++)
         {
-            if (roster[i] != null && !checkArray(tempArr, roster[i].getDateInt()))
+            if ((roster[i] != null && roster[i].getLastPayment() != null) && !checkArray(tempArr, roster[i].getDateInt()))
             {
                 tempArr[arrIndex] = roster[i].getDateInt();
                 arrIndex++;
@@ -234,13 +241,21 @@ public class Roster {
 
         Roster roster1= new Roster();
         roster1.add(student1);
+        roster1.pay(student1, 10, new Date("08/31/2000"));
         roster1.add(student2);
+        roster1.pay(student2, 10, new Date("09/01/2000"));
         roster1.add(student3);
+        roster1.pay(student3, 10, new Date("08/02/2000"));
         roster1.add(student4);
+        roster1.pay(student4, 10, new Date("09/03/2000"));
         roster1.printRoster();
 
-        System.out.println();
+        System.out.println("name:");
 
         roster1.printByName();
+
+        System.out.println("date:");
+
+        roster1.printByDate();
     }
 }

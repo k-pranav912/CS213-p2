@@ -2,6 +2,11 @@ package studentroster;
 
 import java.text.DecimalFormat;
 
+/**
+ * Intenational class, builds upon the non-resident class.
+ * Defines and creates further methods specific to non-resident international students on top of residents.
+ * @author Neel Prabhu, Saipranav Kalapala
+ */
 public class International extends NonResident{
     private boolean isStudyAbroad;
     private double tuitionDue = 0;
@@ -9,13 +14,26 @@ public class International extends NonResident{
     private static final int minInternationalCredits = 12;
     private static final int additionalFee = 2650;
 
+    /**
+     * Constructor method, creates an instance of international class based off of non-resident superclass.
+     * @param profile Profile instance; contains name and major.
+     * @param credits Number of credits the student is taking.
+     * @param studyAbroad true if the student is currently studying abroad, false if not.
+     */
     public International(Profile profile, int credits, boolean studyAbroad) {
         super(profile, credits);
         this.isStudyAbroad = studyAbroad;
     }
 
+    /**
+     * Getter method to return the min credits an international student can take.
+     * @return min credits an international student can take.
+     */
     public static int getMinInternationalCredits() { return minInternationalCredits; }
 
+    /**
+     * Setter method to set the study-aborad status of an international student.
+     */
     public void setStudyAbroadStatusTrue() {
         this.isStudyAbroad = true;
         if (this.getCreditHours() > minInternationalCredits) this.setCreditHours(minInternationalCredits);
@@ -23,6 +41,9 @@ public class International extends NonResident{
         this.tuitionDue();
     }
 
+    /**
+     * Calculates the tuition due for a non-resident international student based off of the fee structure.
+     */
     @Override
     public void tuitionDue() {
         if (!isStudyAbroad) {
@@ -36,11 +57,21 @@ public class International extends NonResident{
         tuitionDue -= getTuitionPaid();
     }
 
+    /**
+     * Method to return the current tuition due for a non-resident international student instance.
+     * @return
+     */
     @Override
     public double getTuition() {
         return tuitionDue;
     }
 
+    /**
+     * String representation of the Student instance.
+     * Subclasses add onto this.
+     * format: Name:Major:Credits:Tuition-Due:Total-Payment:Last-Payment-Date:Residency-Status
+     * @return
+     */
     @Override
     public String toString() {
         String result = super.toString();
