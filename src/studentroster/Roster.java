@@ -74,9 +74,9 @@ public class Roster {
 
     public boolean pay(Student student, double amountPaid, Date lastPayment) {
         int studentIndex = find(student);
-        if (studentIndex < 0) return false;
-        student.addTuitionPaid(amountPaid, lastPayment);
-        student.tuitionDue();
+        if (amountPaid > roster[studentIndex].getTuition()) return false;
+        roster[studentIndex].addTuitionPaid(amountPaid, lastPayment);
+        roster[studentIndex].tuitionDue();
         return true;
     }
 
