@@ -9,7 +9,6 @@ import java.text.DecimalFormat;
  */
 public class Resident extends Student{
 
-    private boolean hasTakenAid = false;
     private double tuitionDue = 0;
 
     private static final int maxfinAid = 10000;
@@ -26,18 +25,6 @@ public class Resident extends Student{
     public Resident(Profile profile, int credits) {
         super(profile, credits);
         this.finAid = 0;
-    }
-
-    /**
-     * Constructor method, creates an instance of Non-resident class based off of student superclass.
-     * @param profile Profile instance; contains name and major.
-     * @param credits Number of credits the student is taking.
-     * @param finAid Amount of one-time financial aid a student receives.
-     */
-    public Resident(Profile profile, int credits, int finAid) {
-        super(profile, credits);
-        this.finAid = finAid;
-        hasTakenAid = true;
     }
 
     /**
@@ -64,8 +51,7 @@ public class Resident extends Student{
     public boolean setFinAid(double amount) {
         if (finAid > 0) return false;
         finAid = amount;
-        hasTakenAid = true;
-        this.tuitionDue();
+        tuitionDue -= finAid;
         return true;
     }
 
@@ -80,12 +66,9 @@ public class Resident extends Student{
             if (over16Credits > 0) {
                 tuitionDue += over16Credits * tuitionRate;
             }
-            tuitionDue -= finAid;
         } else {
             tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
-            tuitionDue -= finAid;
         }
-        tuitionDue -= finAid;
         tuitionDue -= getTuitionPaid();
     }
 
