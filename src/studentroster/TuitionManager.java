@@ -4,7 +4,9 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * TuitionManager class, which is called by RunProject2 and handles the inputs
+ * TuitionManager class, which is called by RunProject2 and handles the inputs from the user, turning them into commands
+ * to run in the Roster class. Parses the user input to find the command, as well as the information relevant to the
+ * command, and sends that information to roster.
  */
 public class TuitionManager {
 
@@ -17,6 +19,11 @@ public class TuitionManager {
         System.exit(0);
     }
 
+    /**
+     * Parses and creates a new profile for a student, given a tokenized input, as long as the input is valid
+     * @param strTokens Tokenized input, starting after the comma proceeding the command
+     * @return Newly made profile. null if faulty input
+     */
     private static Profile makeProfile(StringTokenizer strTokens)
     {
         if (strTokens.hasMoreTokens() == false) {
@@ -39,8 +46,13 @@ public class TuitionManager {
         return profile;
     }
 
-
-
+    /**
+     * Parses and checks to see if the credits are a valid number of credits, as long as the input is valid
+     * @param strTokens Tokenized input, starting with the credits
+     * @param isInternational Boolean if the student is international, to check if the student must have at least
+     *                        MIN_INTERNATIONAL_CREDITS
+     * @return the number of credits the student is taking. -1 if faulty input or not the right number of credits
+     */
     private static int checkCredits(StringTokenizer strTokens, boolean isInternational)
     {
         if (strTokens.hasMoreTokens() == false) {
@@ -79,6 +91,11 @@ public class TuitionManager {
         return credits;
     }
 
+    /**
+     * Parses and checks for a valid state, NY or CT, for tri-state students, as long as input is valid
+     * @param strTokens Tokenized string, starting at the state initials
+     * @return 1 if NY, 0 if CT, -1 if invalid
+     */
     private static int checkState(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Missing Data in command line");
@@ -95,6 +112,12 @@ public class TuitionManager {
         return -1;
     }
 
+    /**
+     * Parses and checks for a valid study abroad status, true or false, for international students, as long as input
+     * is valid
+     * @param strTokens Tokenized string, starting at the status
+     * @return 1 if studying abroad, 0 if not studying abroad, -1 if invalid
+     */
     private static int checkStudyAbroad(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Missing Data in command line");
@@ -112,6 +135,11 @@ public class TuitionManager {
         }
     }
 
+    /**
+     * Calls add() from the roster class and prints appropriate result
+     * @param student Student to be added
+     * @param studentRoster Current user roster
+     */
     private static void addStudent(Student student, Roster studentRoster)
     {
         if (studentRoster.add(student) == false)
@@ -120,6 +148,12 @@ public class TuitionManager {
             System.out.println("Student added.");
     }
 
+    /**
+     * Parses through the rest of a tokenized string for when the user is adding a resident. Stops parsing if any of
+     * the input was invalid
+     * @param strTokens Tokenized string, starting after the initial command
+     * @param studentRoster Current user roster
+     */
     private static void addResident(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -130,6 +164,12 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
+    /**
+     * Parses through the rest of a tokenized string for when the user is adding a nonresident. Stops parsing if any of
+     * the input was invalid
+     * @param strTokens Tokenized string, starting after the initial command
+     * @param studentRoster Current user roster
+     */
     private static void addNonResident(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -142,6 +182,12 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
+    /**
+     * Parses through the rest of a tokenized string for when the user is adding a tristate student, including a new
+     * input: the state the non-resident is from. Stops parsing if any of the input was invalid
+     * @param strTokens Tokenized string, starting after the initial command
+     * @param studentRoster Current user roster
+     */
     private static void addTriState(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -158,6 +204,12 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
+    /**
+     * Parses through the rest of a tokenized string for when the user is adding an international student, including a new
+     * input: the boolean if they study abroad or not. Stops parsing if any of the input was invalid
+     * @param strTokens Tokenized string, starting after the initial command
+     * @param studentRoster Current user roster
+     */
     private static void addInternational(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -175,6 +227,13 @@ public class TuitionManager {
         addStudent(student, studentRoster);
     }
 
+    /**
+     * Parses through the rest of a tokenized string for when the user is removing a student with appropriate print
+     * statements on failure and success
+     * @param strTokens Tokenized string, starting after the initial command
+     * @param studentRoster Current user roster
+     */
+
     private static void removeStudent(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -185,12 +244,22 @@ public class TuitionManager {
         else System.out.println("Student removed from the roster.");
     }
 
+    /**
+     * Calls calculate() in the Roster class and prints when successful
+     * @param studentRoster Current user roster
+     */
     private static void calculateTuition(Roster studentRoster) {
         studentRoster.calculate();
         System.out.println("Calculation completed.");
     }
 
-    private static double checkPayment(Student student, StringTokenizer strTokens, boolean isFinancialAid) {
+    /**
+     * Parses through the payment of tuition or financial aid for valid inputs
+     * @param strTokens Tokenized string, starting where the payment/financial aid is
+     * @param isFinancialAid True if the value is financial aid, false if it is a payment
+     * @return The integer value of the payment/financial aid. -1 if invalid
+     */
+    private static double checkPayment(StringTokenizer strTokens, boolean isFinancialAid) {
         if (strTokens.hasMoreTokens() == false) {
             if (isFinancialAid) {
                 System.out.println("Missing the amount.");
@@ -214,6 +283,11 @@ public class TuitionManager {
         return payment;
     }
 
+    /**
+     * Parses through the date of a payment and checks for validity
+     * @param strTokens Tokenized string, starting at the date of payment
+     * @return Date object containing the payment date
+     */
     private static Date checkDate(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
             System.out.println("Payment Date is missing.");
@@ -226,13 +300,20 @@ public class TuitionManager {
         }
         return paymentDate;
     }
+
+    /**
+     * Parses through the input after the user calls to pay tuition, and calls pay() in the Roster class if valid.
+     * Prints appropriate result on return of pay()
+     * @param strTokens Tokenized string, starting after the initial pay command
+     * @param studentRoster Current user roster
+     */
     private static void payTuition(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
         Student student = new Student(profile);
 
-        double payment = checkPayment(student, strTokens, false);
+        double payment = checkPayment(strTokens, false);
         if (payment < 0) return;
 
         Date lastPaymentDate = checkDate(strTokens);
@@ -244,6 +325,12 @@ public class TuitionManager {
         else System.out.println("Payment applied.");
     }
 
+    /**
+     * Parses through the tokenized string and calls setAbroad() in Roster class, if valid. Prints appropriate result
+     * on return of setAbroad()
+     * @param strTokens Tokenized string, starting after the initial set study abroad command
+     * @param studentRoster Current user roster
+     */
     private static void setStudyAbroad(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
@@ -256,13 +343,19 @@ public class TuitionManager {
         else System.out.println("Tuition updated.");
     }
 
+    /**
+     * Parses through the string and calls setFinancialAid() in roster, if valid. Prints appropriate result
+     * on return of setFinancialAid()
+     * @param strTokens Tokenized string, starting after the set financial aid command
+     * @param studentRoster Current user roster
+     */
     private static void setFinancialAid(StringTokenizer strTokens, Roster studentRoster) {
         Profile profile = makeProfile(strTokens);
         if (profile == null) return;
 
         Student student = new Student(profile);
 
-        double finAidAmount = checkPayment(student, strTokens, true);
+        double finAidAmount = checkPayment(strTokens, true);
         if (finAidAmount < 0) return;
         if (finAidAmount > Resident.getMaxfinAid()) {
             System.out.println("Invalid Amount.");
@@ -270,19 +363,19 @@ public class TuitionManager {
         }
 
         switch (studentRoster.setFinancialAid(student, finAidAmount)) {
-            case 0:
+            case Roster.SUCCESS:
                 System.out.println("Tuition Updated.");
                 break;
-            case -1:
+            case Roster.NOT_IN_ROSTER:
                 System.out.println("Student not in the roster.");
                 break;
-            case -2:
+            case Roster.NOT_RESIDENT:
                 System.out.println("Not a resident student.");
                 break;
-            case -3:
+            case Roster.PARTTIME:
                 System.out.println("Parttime student doesn't qualify for the award.");
                 break;
-            case -4:
+            case Roster.ALREADY_AWARDED:
                 System.out.println("Awarded once already.");
                 break;
         }

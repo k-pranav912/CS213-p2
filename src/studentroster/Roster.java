@@ -10,6 +10,11 @@ public class Roster {
 
     private static final int ROSTER_INCREASE_SIZE = 4;
     private static final int NOT_FOUND = -1;
+    public static final int SUCCESS = 0;
+    public static final int NOT_IN_ROSTER = -1;
+    public static final int NOT_RESIDENT = -2;
+    public static final int PARTTIME = -3;
+    public static final int ALREADY_AWARDED = -4;
 
     /**
      * Constructor method that initializes a Roster instance.
@@ -19,6 +24,11 @@ public class Roster {
         this.roster = new Student[ROSTER_INCREASE_SIZE];
     }
 
+    /**
+     * Searchs through the roster to find the student
+     * @param student Target student
+     * @return Index of student if found, NOT_FOUND if not found.
+     */
     private int find(Student student){
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null && student.equals(roster[i])) {
@@ -28,6 +38,9 @@ public class Roster {
         return NOT_FOUND;
     }
 
+    /**
+     * Grows the roster array by a size of ROSTER_INCREASE_SIZE
+     */
     private void grow() {
         Student[] tempRoster;
         tempRoster = roster;
@@ -39,6 +52,10 @@ public class Roster {
 
     }
 
+    /**
+     * Finds the next empty element in the roster array
+     * @return Index of empty element, NOT_FOUND if there are none
+     */
     private int findNextEmpty() {
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] == null) return i;
@@ -46,6 +63,11 @@ public class Roster {
         return NOT_FOUND;
     }
 
+    /**
+     * Adds a student to the roster array, if the student is not already in the array
+     * @param student Student to be added
+     * @return true if student was added, false if they already were in the roster
+     */
     public boolean add(Student student) {
         if (find(student) >= 0) return false;
         int newStudentIndex = findNextEmpty();
@@ -58,6 +80,11 @@ public class Roster {
         return true;
     }
 
+    /**
+     * Removes the student from the roster array, if they were present
+     * @param student Student to be removed
+     * @return true if student was removed, false if they weren't in the array
+     */
     public boolean remove(Student student) {
         int deletionIndex = find(student);
         if (deletionIndex < 0) return false;
@@ -66,20 +93,35 @@ public class Roster {
         return true;
     }
 
+    /**
+     * Calculates the tuition of all students in the roster
+     */
     public void calculate() {
         for (int i = 0; i < roster.length; i++) {
             if (roster[i] != null) roster[i].tuitionDue();
         }
     }
 
-    public boolean pay(Student student, double amountPaid, Date lastPayment) {
+    /**
+     * Pays some/all of the tuition of the student in question, if the payment is less than or equal to the tuition due
+     * @param student Student who's tuition is being paid
+     * @param amountPaid Amount of tuition being paid
+     * @param newPayment Date of the new payment
+     * @return true if the pay was successful, false if the payment was greater than the amount of tuition required
+     */
+    public boolean pay(Student student, double amountPaid, Date newPayment) {
         int studentIndex = find(student);
         if (amountPaid > roster[studentIndex].getTuition()) return false;
-        roster[studentIndex].addTuitionPaid(amountPaid, lastPayment);
+        roster[studentIndex].addTuitionPaid(amountPaid, newPayment);
         roster[studentIndex].tuitionDue();
         return true;
     }
 
+    /**
+     * Sets the students study abroad status to true, if they were an international student
+     * @param student Student to be set to studying abroad
+     * @return true if successful, false if the student was not an international student
+     */
     public boolean setAbroad(Student student) {
         int studentIndex = find(student);
         if (studentIndex < 0) return false;
@@ -90,22 +132,35 @@ public class Roster {
         return false;
     }
 
+    /**
+     * Sets the financial aid amount for the resident student, if it is a valid amount and resident
+     * @param student Student to be given financial aid
+     * @param finAidAmount Amount of financial aid given
+     * @return SUCCESS - On success
+     *         NOT_IN_ROSTER - Student was not in the roster
+     *         NOT_RESIDENT - Student is not a resident
+     *         PARTTIME - Student is not a full time student
+     *         ALREADY_AWARDED - Student has already been given financial aid
+     */
     public int setFinancialAid(Student student, double finAidAmount) {
         int studentIndex = find(student);
-        if (studentIndex < 0) return -1;
+        if (studentIndex < 0) return NOT_IN_ROSTER;
 
         if (!(roster[studentIndex] instanceof Resident)) {
-            return -2;
+            return NOT_RESIDENT;
         }
         if (roster[studentIndex].isPartTime()) {
-            return -3;
+            return PARTTIME;
         }
         if (((Resident) roster[studentIndex]).setFinAid(finAidAmount) == false) {
-            return -4;
+            return ALREADY_AWARDED;
         }
-        return 0;
+        return SUCCESS;
     }
 
+    /**
+     * Prints the roster of students
+     */
     public void printRoster() {
         if (size <= 0) {
             System.out.println("Student roster is empty!");
@@ -118,6 +173,9 @@ public class Roster {
         System.out.println("* end of roster **");
     }
 
+    /**
+     * Prints the roster of students, sorted by their names
+     */
     public void printByName() {
         if (size <= 0) {
             System.out.println("Student roster is empty!");
@@ -199,6 +257,9 @@ public class Roster {
         return tempArr;
     }
 
+    /**
+     * Prints the roster of students, sorted by their last payment date
+     */
     public void printByDate()
     {
         if (size <= 0)
