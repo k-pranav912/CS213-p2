@@ -226,22 +226,22 @@ public class Roster {
     public static void main(String[] args) {
         Major major = Major.toMajor("CS");
         Profile profile = new Profile("Pranav", major);
-        Student student1 = new Resident(profile, 18, 1000);
+        Student student1 = new Resident(profile, 18);
         System.out.println(student1);
 
         Major major2 = Major.toMajor("EE");
         Profile profile2 = new Profile("Neel", major2);
-        Student student2 = new Resident(profile2, 17, 1234);
+        Student student2 = new Resident(profile2, 17);
         System.out.println(student2);
 
         Major major3 = Major.toMajor("EE");
         Profile profile3 = new Profile("Ishan", major3);
-        Student student3 = new Resident(profile3, 15, 12);
+        Student student3 = new Resident(profile3, 15);
         System.out.println(student3);
 
         Major major4 = Major.toMajor("EE");
         Profile profile4 = new Profile("Sanjiv", major4);
-        Student student4 = new Resident(profile4, 13, 154);
+        Student student4 = new Resident(profile4, 13);
         System.out.println(student2);
 
         System.out.println();
