@@ -54,7 +54,7 @@ public class International extends NonResident{
             tuitionDue += additionalFee;
             tuitionDue += getUniversityFeeFullTime();
         }
-        tuitionDue -= getTuitionPaid();
+        //tuitionDue -= getTuitionPaid();
     }
 
     /**

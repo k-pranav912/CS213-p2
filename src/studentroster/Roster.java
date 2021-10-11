@@ -213,7 +213,7 @@ public class Roster {
 
             for (int j = 0; j < roster.length; j++)
             {
-                if (roster[j] != null && roster[j].getDateInt() == releaseDates[i]) System.out.println(roster[j]);
+                if ((roster[j] != null && roster[i].getLastPayment() != null) && roster[j].getDateInt() == releaseDates[i]) System.out.println(roster[j]);
             }
         }
         System.out.println("*End of list");

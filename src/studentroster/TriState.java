@@ -43,7 +43,7 @@ public class TriState extends NonResident{
                 tuitionDue -= connecticutDiscount;
             }
         }
-        tuitionDue -= getTuitionPaid();
+        //tuitionDue -= getTuitionPaid();
     }
 
     /**
