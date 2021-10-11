@@ -11,8 +11,8 @@ public class NonResident extends Student{
 
     private double tuitionDue = 0;
 
-    private static final int tuition = 29737;
-    private static final int tuitionRate = 966;
+    private static final int TUITION = 29737;
+    private static final int TUITION_RATE = 966;
 
     /**
      * Constructor method, creates an instance of Non-resident class based off of student superclass.
@@ -29,13 +29,13 @@ public class NonResident extends Student{
     @Override
     public void tuitionDue() {
         if (super.getCreditHours() > super.getMaxPartTimeCredits()) {
-            tuitionDue = tuition + super.getUniversityFeeFullTime();
+            tuitionDue = TUITION + super.getUniversityFeeFullTime();
             int over16Credits = super.getCreditHours() - super.getFreeFullTimeCredits();
             if (over16Credits > 0) {
-                tuitionDue += over16Credits * tuitionRate;
+                tuitionDue += over16Credits * TUITION_RATE;
             }
         } else {
-            tuitionDue = (tuitionRate * super.getCreditHours()) + super.getUniversityFeePartTime();
+            tuitionDue = (TUITION_RATE * super.getCreditHours()) + super.getUniversityFeePartTime();
         }
         tuitionDue -= getTuitionPaid();
     }

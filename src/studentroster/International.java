@@ -11,8 +11,8 @@ public class International extends NonResident{
     private boolean isStudyAbroad;
     private double tuitionDue = 0;
 
-    private static final int minInternationalCredits = 12;
-    private static final int additionalFee = 2650;
+    private static final int MIN_INTERNATIONAL_CREDITS = 12;
+    private static final int ADDITIONAL_FEE = 2650;
 
     /**
      * Constructor method, creates an instance of international class based off of non-resident superclass.
@@ -29,16 +29,16 @@ public class International extends NonResident{
      * Getter method to return the min credits an international student can take.
      * @return min credits an international student can take.
      */
-    public static int getMinInternationalCredits() { return minInternationalCredits; }
+    public static int getMinInternationalCredits() { return MIN_INTERNATIONAL_CREDITS; }
 
     /**
      * Setter method to set the study-abroad status of an international student.
      */
     public void setStudyAbroadStatusTrue() {
         this.isStudyAbroad = true;
-        if (this.getCreditHours() > minInternationalCredits) this.setCreditHours(minInternationalCredits);
+        if (this.getCreditHours() > MIN_INTERNATIONAL_CREDITS) this.setCreditHours(MIN_INTERNATIONAL_CREDITS);
         this.resetTuitionPaid();
-        this.tuitionDue = additionalFee + getUniversityFeeFullTime();
+        this.tuitionDue = ADDITIONAL_FEE + getUniversityFeeFullTime();
     }
 
     /**
@@ -49,10 +49,10 @@ public class International extends NonResident{
         if (!isStudyAbroad) {
             super.tuitionDue();
             tuitionDue = super.getTuition();
-            tuitionDue += additionalFee;
+            tuitionDue += ADDITIONAL_FEE;
         } else {
             tuitionDue = 0;
-            tuitionDue += additionalFee;
+            tuitionDue += ADDITIONAL_FEE;
             tuitionDue += getUniversityFeeFullTime();
             tuitionDue -= getTuitionPaid();
         }

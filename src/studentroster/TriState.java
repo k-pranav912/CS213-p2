@@ -11,8 +11,8 @@ public class TriState extends NonResident{
 
     private double tuitionDue = 0;
 
-    private static final int newyorkDiscount = 4000;
-    private static final int connecticutDiscount = 5000;
+    private static final int NEWYORK_DISCOUNT = 4000;
+    private static final int CONNECTICUT_DISCOUNT = 5000;
 
     // true if from NY, false if from CT
     private boolean fromNY;
@@ -38,9 +38,9 @@ public class TriState extends NonResident{
         tuitionDue = super.getTuition();
         if (!isPartTime()) {
             if (fromNY) {
-                tuitionDue -= newyorkDiscount;
+                tuitionDue -= NEWYORK_DISCOUNT;
             } else {
-                tuitionDue -= connecticutDiscount;
+                tuitionDue -= CONNECTICUT_DISCOUNT;
             }
         }
         //tuitionDue -= getTuitionPaid();

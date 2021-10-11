@@ -11,12 +11,12 @@ public class Student {
     private double tuitionPaid;
     private Date lastPayment;
 
-    private static final int minCredits = 3;
-    private static final int maxCredits = 24;
-    private static final int maxPartTimeCredits = 11;
-    private static final int freeFullTimeCredits = 16;
-    private static final int universityFeeFullTime = 3268;
-    private static final double universityFeePartTime = 0.80 * universityFeeFullTime;
+    private static final int MIN_CREDITS = 3;
+    private static final int MAX_CREDITS = 24;
+    private static final int MAX_PART_TIME_CREDITS = 11;
+    private static final int FREE_FULL_TIME_CREDITS = 16;
+    private static final int UNIVERSITY_FEE_FULL_TIME = 3268;
+    private static final double UNIVERSITY_FEE_PART_TIME = 0.80 * UNIVERSITY_FEE_FULL_TIME;
 
     /**
      * Constructor method; creates an instance of the student class with profile and the number of credits.
@@ -68,7 +68,7 @@ public class Student {
      * @return min credits a student can take.
      */
     public static int getMinCredits() {
-        return minCredits;
+        return MIN_CREDITS;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Student {
      * @return max credits a student can take.
      */
     public static int getMaxCredits() {
-        return maxCredits;
+        return MAX_CREDITS;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Student {
      * @return max credits a student can take to be considered as a part-time student.
      */
     public int getMaxPartTimeCredits() {
-        return maxPartTimeCredits;
+        return MAX_PART_TIME_CREDITS;
     }
 
     /**
@@ -117,7 +117,7 @@ public class Student {
      * @return university fee for full-time students
      */
     public static int getUniversityFeeFullTime() {
-        return universityFeeFullTime;
+        return UNIVERSITY_FEE_FULL_TIME;
     }
 
     /**
@@ -125,7 +125,7 @@ public class Student {
      * @return university fee for part-time students.
      */
     public static double getUniversityFeePartTime() {
-        return universityFeePartTime;
+        return UNIVERSITY_FEE_PART_TIME;
     }
 
     /**
@@ -133,7 +133,7 @@ public class Student {
      * @return number of full-time credits a student can take without additional fees.
      */
     public static int getFreeFullTimeCredits() {
-        return freeFullTimeCredits;
+        return FREE_FULL_TIME_CREDITS;
     }
 
     /**
@@ -147,7 +147,7 @@ public class Student {
      * @return boolean; true if part-time; false otherwise.
      */
     public boolean isPartTime() {
-        if (creditHours > maxPartTimeCredits) return false;
+        if (creditHours > MAX_PART_TIME_CREDITS) return false;
         return true;
     }
 
