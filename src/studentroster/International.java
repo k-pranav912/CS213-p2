@@ -88,13 +88,4 @@ public class International extends NonResident{
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        Major major = Major.toMajor("CS");
-        Profile profile = new Profile("Pranav", major);
-        International student = new International(profile, 17, true);
-        student.tuitionDue();
-        System.out.println(student.getTuition());
-        System.out.println(student);
-    }
 }
