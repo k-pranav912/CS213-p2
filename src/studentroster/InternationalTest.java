@@ -23,7 +23,6 @@ public class InternationalTest {
         Profile profile2 = new Profile("xyz", major2);
         International test2 = new International(profile2, 16, false);
         test2.tuitionDue();
-        System.out.println(test2.getTuition());
         assertTrue(test2.getTuition() == defaultInternationalTuition);
 
         test2.setStudyAbroadStatusTrue();
