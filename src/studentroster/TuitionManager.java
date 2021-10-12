@@ -449,7 +449,7 @@ public class TuitionManager {
             StringTokenizer strTokens = new StringTokenizer(input, ",");
 
             if (parseTokens(strTokens, studentRoster) == false)
-                System.out.println("Command '" + input + "' not supported");
+                System.out.println("Command '" + input + "' not supported!");
         }
     }
 }
