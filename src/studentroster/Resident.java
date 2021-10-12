@@ -15,7 +15,7 @@ public class Resident extends Student{
     private static final int TUITION = 12536;
     private static final int TUITION_RATE = 404;
 
-    private static double finAid;
+    private double finAid;
 
     /**
      * Constructor method, creates an instance of resident class based off of student superclass.
@@ -95,7 +95,7 @@ public class Resident extends Student{
 
         result += ":total payment:" + df.format(getTuitionPaid());
 
-        result += ":last payment:";
+        result += ":last payment date:";
 
         if (getLastPayment() == null) {
             result += "--/--/--";
@@ -103,7 +103,7 @@ public class Resident extends Student{
             result += getLastPayment().toString() + ":";
         }
 
-        result += ":resident";
+        result += "resident";
 
         if (finAid > 0) {
             result += ":" + "financial aid $" + df.format(finAid);

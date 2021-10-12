@@ -28,12 +28,12 @@ public class TuitionManager {
     private static Profile makeProfile(StringTokenizer strTokens)
     {
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Missing Data in command line");
+            System.out.println("Missing data in command line.");
             return null;
         }
         String name = strTokens.nextToken();
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Missing Data in command line");
+            System.out.println("Missing data in command line.");
             return null;
         }
         String majorString = strTokens.nextToken();
@@ -67,7 +67,7 @@ public class TuitionManager {
             credits = Integer.parseInt(creditHours);
         }
         catch (NumberFormatException e) {
-            System.out.println("Invalid credit hours");
+            System.out.println("Invalid credit hours.");
             return -1;
         }
         if (credits < 0) {
@@ -291,7 +291,7 @@ public class TuitionManager {
      */
     private static Date checkDate(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Payment Date is missing.");
+            System.out.println("Payment date is missing.");
             return null;
         }
         Date paymentDate = new Date(strTokens.nextToken());
@@ -359,13 +359,13 @@ public class TuitionManager {
         double finAidAmount = checkPayment(strTokens, true);
         if (finAidAmount < 0) return;
         if (finAidAmount > Resident.getMaxfinAid()) {
-            System.out.println("Invalid Amount.");
+            System.out.println("Invalid amount.");
             return;
         }
 
         switch (studentRoster.setFinancialAid(student, finAidAmount)) {
             case Roster.SUCCESS:
-                System.out.println("Tuition Updated.");
+                System.out.println("Tuition updated.");
                 break;
             case Roster.NOT_IN_ROSTER:
                 System.out.println("Student not in the roster.");
@@ -449,7 +449,7 @@ public class TuitionManager {
             StringTokenizer strTokens = new StringTokenizer(input, ",");
 
             if (parseTokens(strTokens, studentRoster) == false)
-                System.out.println("Command '" + input + "' is not supported");
+                System.out.println("Command '" + input + "' not supported");
         }
     }
 }

@@ -64,7 +64,7 @@ public class NonResident extends Student{
 
         result += ":total payment:" + df.format(getTuitionPaid());
 
-        result += ":last payment:";
+        result += ":last payment date:";
 
         if (getLastPayment() == null) {
             result += "--/--/--";
@@ -72,7 +72,7 @@ public class NonResident extends Student{
             result += getLastPayment().toString() + ":";
         }
 
-        result += ":non-resident";
+        result += "non-resident";
 
         return result;
     }

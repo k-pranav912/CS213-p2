@@ -84,7 +84,7 @@ public class International extends NonResident{
         result += ":international";
 
         if (isStudyAbroad) {
-            result += ":study-abroad";
+            result += ":study abroad";
         }
         return result;
     }
