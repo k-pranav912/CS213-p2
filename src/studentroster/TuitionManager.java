@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
  * TuitionManager class, which is called by RunProject2 and handles the inputs from the user, turning them into commands
  * to run in the Roster class. Parses the user input to find the command, as well as the information relevant to the
  * command, and sends that information to roster.
+ * @author Neel Prabhu, Saipranav Kalapala
  */
 public class TuitionManager {
 

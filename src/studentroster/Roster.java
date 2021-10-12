@@ -3,6 +3,7 @@ package studentroster;
 /**
  * Roster Class; handles the implementation of a roster of students.
  * Includes different students such as residents, non-residents, tri-state non-residents and international students.
+ * @authors Neel Prabhu, Saipranav Kalapala
  */
 public class Roster {
     private Student[] roster;
