@@ -51,6 +51,7 @@ public class Resident extends Student{
     public boolean setFinAid(double amount) {
         if (finAid > 0) return false;
         finAid = amount;
+        tuitionDue();
         return true;
     }
 
@@ -69,6 +70,7 @@ public class Resident extends Student{
             tuitionDue = (TUITION_RATE * super.getCreditHours()) + super.getUniversityFeePartTime();
         }
         tuitionDue -= getTuitionPaid();
+        tuitionDue -= finAid;
     }
 
     /**
@@ -100,7 +102,7 @@ public class Resident extends Student{
         if (getLastPayment() == null) {
             result += " --/--/--:";
         } else {
-            result += getLastPayment().toString() + ":";
+            result += " " + getLastPayment().toString() + ":";
         }
 
         result += "resident";
