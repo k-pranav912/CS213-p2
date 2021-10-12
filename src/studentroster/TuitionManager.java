@@ -99,7 +99,7 @@ public class TuitionManager {
      */
     private static int checkState(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Missing Data in command line");
+            System.out.println("Missing data in command line.");
             return -1;
         }
         String state = strTokens.nextToken();
@@ -121,7 +121,7 @@ public class TuitionManager {
      */
     private static int checkStudyAbroad(StringTokenizer strTokens) {
         if (strTokens.hasMoreTokens() == false) {
-            System.out.println("Missing Data in command line");
+            System.out.println("Missing data in command line.");
             return -1;
         }
         String studyAbroad = strTokens.nextToken();

@@ -69,7 +69,7 @@ public class NonResident extends Student{
         if (getLastPayment() == null) {
             result += " --/--/--:";
         } else {
-            result += getLastPayment().toString() + ":";
+            result += " " + getLastPayment().toString() + ":";
         }
 
         result += "non-resident";

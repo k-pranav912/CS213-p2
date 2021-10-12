@@ -36,15 +36,7 @@ public class Resident extends Student{
     }
 
     /**
-     * Getter method to return the amount of financial aid a student has received.
-     * @return
-     */
-    public double getFinAid() {
-        return finAid;
-    }
-
-    /**
-     * Setter mehtod to set the amount of financial aid a student receives.
+     * Setter method to set the amount of financial aid a student receives.
      * @param amount amount of financial aid
      * @return true if student has not already taken aid.
      */
