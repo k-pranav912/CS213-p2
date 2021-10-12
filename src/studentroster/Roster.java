@@ -211,6 +211,12 @@ public class Roster {
 
     }
 
+    /**
+     * Method to check if a certain value (key) exists in the integer array.
+     * @param arr Integer array
+     * @param key Integer value
+     * @return boolean; true if key exists in the array, false otherwise.
+     */
     private boolean checkArray(int[] arr, int key)
     {
         for (int i = 0; i < arr.length; i++)
@@ -220,6 +226,11 @@ public class Roster {
         return false;
     }
 
+    /**
+     * Method to sort an integer array using Insertion Sort.
+     * @param arr Integer array.
+     * @return Integer array sorted in the ascending order.
+     */
     public static int[] arrSort(int[] arr)
     {
         for (int i = 0; i < arr.length; i++)
@@ -238,6 +249,12 @@ public class Roster {
         return arr;
     }
 
+    /**
+     * Method to generate an array based on the indexed dates of all the student payments in the roster.
+     * Parses through the collection, collects all the indexed dates from the albums into an array,
+     * and sorts the array in ascending order.
+     * @return sorted array containing all the indexed dates of the albums in the roster.
+     */
     private int[] genDateArray()
     {
         int[] tempArr = new int[size];
